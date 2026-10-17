@@ -12,7 +12,7 @@ public final class GroupMemberMapper {
         return new GroupMemberResponse(
                 member.getGroup().getId(),
                 member.getUser().getId(),
-                member.getUser().getName(),
+                member.getUser().getUserName(),
                 member.getRole(),
                 member.getJoinedAt()
         );

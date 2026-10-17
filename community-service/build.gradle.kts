@@ -28,6 +28,9 @@ dependencies {
     // Persistence
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+    // Security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
     // REST API and validation
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-validation")

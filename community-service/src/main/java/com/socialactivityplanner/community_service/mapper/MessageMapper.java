@@ -13,7 +13,7 @@ public final class MessageMapper {
                 message.getId(),
                 message.getGroup().getId(),
                 message.getSender().getId(),
-                message.getSender().getName(),
+                message.getSender().getUserName(),
                 message.getContent(),
                 message.getSentAt(),
                 message.getUpdatedAt()
