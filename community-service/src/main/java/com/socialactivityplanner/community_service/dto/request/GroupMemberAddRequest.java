@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record GroupMemberAddRequest(
-        @NotNull
-        UUID userId,
+    @NotNull UUID userId,
 
-        GroupRole role
-) {}
+    GroupRole role) {
+}

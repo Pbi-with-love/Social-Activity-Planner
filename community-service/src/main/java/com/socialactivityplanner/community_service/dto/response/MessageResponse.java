@@ -4,11 +4,11 @@ import java.time.Instant;
 import java.util.UUID;
 
 public record MessageResponse(
-        UUID id,
-        UUID groupId,
-        UUID senderId,
-        String senderUsername,
-        String content,
-        Instant sentAt,
-        Instant updatedAt
-) {}
+    UUID id,
+    UUID groupId,
+    UUID senderId,
+    String senderUsername,
+    String content,
+    Instant sentAt,
+    Instant updatedAt) {
+}
