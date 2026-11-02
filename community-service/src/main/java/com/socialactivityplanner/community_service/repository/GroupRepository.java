@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface GroupRepository extends JpaRepository<Group, UUID> {
 
-    Page<Group> findByCreatedById(UUID userId, Pageable pageable);
-}
+  Page<Group> findByCreatedById(UUID userId, Pageable pageable);
 
+  boolean existsByCreatedById(UUID userId);
+}

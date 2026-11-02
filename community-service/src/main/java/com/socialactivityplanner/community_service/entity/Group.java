@@ -3,6 +3,7 @@ package com.socialactivityplanner.community_service.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
 @Table(name = "groups")
 public class Group {
 
@@ -22,7 +24,7 @@ public class Group {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 100)
   private String name;
 
   private String description;

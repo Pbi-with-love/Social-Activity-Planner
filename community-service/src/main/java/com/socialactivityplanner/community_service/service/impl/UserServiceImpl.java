@@ -87,6 +87,6 @@ public class UserServiceImpl implements UserService {
       user.setEmail(request.email());
     }
 
-    return UserMapper.toResponse(userRepository.save(user));
+    return UserMapper.toResponse(user);
   }
 }
