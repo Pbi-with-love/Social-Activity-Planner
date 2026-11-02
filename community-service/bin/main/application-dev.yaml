@@ -3,8 +3,8 @@ spring:
     name: community-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/social_activity_planner
-    username: taimai
+    url: jdbc:postgresql://aws-0-eu-west-1.pooler.supabase.com:5432/postgres
+    username: postgres.oplzplunhtbcgmhswifd
     password: AnhTai123@@
     driver-class-name: org.postgresql.Driver
 

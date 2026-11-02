@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface GroupService extends JpaRepository<Group, UUID> {
     GroupResponse findByName(String name);
+
 }

@@ -10,4 +10,5 @@ public record UserResponse(
     String lastName,
     String email,
     Instant createdAt,
-    Instant updatedAt) {}
+    Instant updatedAt) {
+}

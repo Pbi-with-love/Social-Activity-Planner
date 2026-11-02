@@ -5,4 +5,5 @@ import java.time.Instant;
 import java.util.UUID;
 
 public record GroupMemberResponse(
-    UUID groupId, UUID userId, String username, GroupRole role, Instant joinedAt) {}
+    UUID groupId, UUID userId, String username, GroupRole role, Instant joinedAt) {
+}

@@ -6,9 +6,17 @@
 build/
 **/build/
 
-# Spring Boot secrets/config
+# Spring application configs with environment-variable placeholders (no credentials)
 **/src/main/resources/application*.yml
 **/src/main/resources/application*.yaml
+!**/src/main/resources/application.yaml
+!**/src/main/resources/application-dev.yaml
+
+# Local environment files and database credentials
+.env
+.env.*
+!.env.example
+*.env
 
 # IntelliJ
 .idea/

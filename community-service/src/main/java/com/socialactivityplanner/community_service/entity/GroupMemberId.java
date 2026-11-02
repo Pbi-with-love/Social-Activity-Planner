@@ -16,6 +16,6 @@ import java.util.UUID;
 @Embeddable
 public class GroupMemberId implements Serializable {
 
-    private UUID groupId;
-    private UUID userId;
+  private UUID groupId;
+  private UUID userId;
 }
