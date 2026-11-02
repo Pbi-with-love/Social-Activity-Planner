@@ -39,7 +39,9 @@ public class GroupServiceImpl implements GroupService {
   @Override
   @Transactional
   public GroupResponse createGroup(UUID userId, GroupCreateRequest request) {
-    Objects.requireNonNull(userId, "userId must not be null");
+    if (userId == null) {
+      throw new IllegalArgumentException("User ID cannot be null");
+    }
 
     User user = userRepository.findById(userId)
         .orElseThrow(() -> new ResourceNotFoundException("User with ID " + userId + " does not exist"));
@@ -61,6 +63,7 @@ public class GroupServiceImpl implements GroupService {
   }
 
   @Override
+  @Transactional
   public GroupResponse updateGroup(UUID groupId, UUID userId, GroupUpdateRequest request) {
     Group group = groupRepository.findById(groupId)
         .orElseThrow(() -> new ResourceNotFoundException("Group not found with id: " + groupId));
