@@ -12,20 +12,20 @@ import java.util.UUID;
 
 public interface GroupService {
 
-    GroupResponse createGroup(UUID userId, GroupCreateRequest request);
+  GroupResponse createGroup(UUID userId, GroupCreateRequest request);
 
-    GroupResponse getGroupById(UUID groupId);
+  GroupResponse getGroupById(UUID groupId);
 
-    GroupResponse updateGroup(UUID groupId, UUID userId, GroupUpdateRequest request);
+  GroupResponse updateGroup(UUID groupId, UUID userId, GroupUpdateRequest request);
 
-    void deleteGroup(UUID groupId, UUID userId);
+  void deleteGroup(UUID groupId, UUID userId);
 
-    GroupMemberResponse addMember(UUID groupId, UUID userId, GroupMemberAddRequest request);
+  GroupMemberResponse addMember(UUID groupId, UUID userId, GroupMemberAddRequest request);
 
-    List<GroupMemberResponse> getMembers(UUID groupId);
+  List<GroupMemberResponse> getMembers(UUID groupId);
 
-    GroupMemberResponse updateMemberRole(UUID groupId, UUID memberId, UUID userId,
-        GroupMemberRoleUpdateRequest request);
+  GroupMemberResponse updateMemberRole(UUID groupId, UUID memberId, UUID userId,
+      GroupMemberRoleUpdateRequest request);
 
-    void removeMember(UUID groupId, UUID memberId, UUID userId);
+  void removeMember(UUID groupId, UUID memberId, UUID userId);
 }

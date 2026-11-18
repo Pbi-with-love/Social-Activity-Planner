@@ -5,18 +5,17 @@ import com.socialactivityplanner.community_service.entity.User;
 
 public final class UserMapper {
 
-    private UserMapper() {
-    }
+  private UserMapper() {
+  }
 
-    public static UserResponse toResponse(User user) {
-        return new UserResponse(
-                user.getId(),
-                user.getUserName(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getCreatedAt(),
-                user.getUpdatedAt()
-        );
-    }
+  public static UserResponse toResponse(User user) {
+    return new UserResponse(
+        user.getId(),
+        user.getUserName(),
+        user.getFirstName(),
+        user.getLastName(),
+        user.getEmail(),
+        user.getCreatedAt(),
+        user.getUpdatedAt());
+  }
 }
