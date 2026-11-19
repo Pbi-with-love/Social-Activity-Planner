@@ -1,22 +1,22 @@
 package com.socialactivityplanner.community_service.service;
 
-import com.socialactivityplanner.community_service.dto.request.GroupCreateRequest;
+import com.socialactivityplanner.community_service.dto.request.ActivityGroupCreateRequest;
 import com.socialactivityplanner.community_service.dto.request.GroupMemberAddRequest;
 import com.socialactivityplanner.community_service.dto.request.GroupMemberRoleUpdateRequest;
-import com.socialactivityplanner.community_service.dto.request.GroupUpdateRequest;
+import com.socialactivityplanner.community_service.dto.request.ActivityGroupUpdateRequest;
 import com.socialactivityplanner.community_service.dto.response.GroupMemberResponse;
-import com.socialactivityplanner.community_service.dto.response.GroupResponse;
+import com.socialactivityplanner.community_service.dto.response.ActivityGroupResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface GroupService {
+public interface ActivityGroupService {
 
-  GroupResponse createGroup(UUID userId, GroupCreateRequest request);
+  ActivityGroupResponse createGroup(UUID userId, ActivityGroupCreateRequest request);
 
-  GroupResponse getGroupById(UUID groupId);
+  ActivityGroupResponse getGroupById(UUID groupId);
 
-  GroupResponse updateGroup(UUID groupId, UUID userId, GroupUpdateRequest request);
+  ActivityGroupResponse updateGroup(UUID groupId, UUID userId, ActivityGroupUpdateRequest request);
 
   void deleteGroup(UUID groupId, UUID userId);
 

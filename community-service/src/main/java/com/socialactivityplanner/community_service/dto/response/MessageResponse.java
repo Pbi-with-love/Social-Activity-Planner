@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public record MessageResponse(
     UUID id,
-    UUID groupId,
+    UUID conversationId,
     UUID senderId,
     String senderUsername,
     String content,

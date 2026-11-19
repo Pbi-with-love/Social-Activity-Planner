@@ -34,12 +34,10 @@ public class UserServiceImpl implements UserService {
       throw new DuplicateResourceException("Username already taken: " + request.userName());
     }
 
-    User user = new User();
-    user.setUserName(request.userName());
-    user.setFirstName(request.firstName());
-    user.setLastName(request.lastName());
-    user.setEmail(request.email());
-    user.setPasswordHash(passwordEncoder.encode(request.password()));
+    User user = new User(
+        request.userName(),
+        request.email(),
+        passwordEncoder.encode(request.password()));
 
     return UserMapper.toResponse(userRepository.save(user));
   }
@@ -74,18 +72,7 @@ public class UserServiceImpl implements UserService {
       throw new DuplicateResourceException("Username already taken: " + request.userName());
     }
 
-    if (request.userName() != null) {
-      user.setUserName(request.userName());
-    }
-    if (request.firstName() != null) {
-      user.setFirstName(request.firstName());
-    }
-    if (request.lastName() != null) {
-      user.setLastName(request.lastName());
-    }
-    if (request.email() != null) {
-      user.setEmail(request.email());
-    }
+    user.updateProfile(request.userName(), request.email());
 
     return UserMapper.toResponse(user);
   }

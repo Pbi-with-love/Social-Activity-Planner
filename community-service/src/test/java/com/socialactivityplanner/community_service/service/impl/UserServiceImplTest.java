@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -37,49 +38,34 @@ class UserServiceImplTest {
   void setUp() {
     userService = new UserServiceImpl(userRepository, passwordEncoder);
     userId = UUID.randomUUID();
-    user = new User();
-    user.setId(userId);
-    user.setUserName("existing_user");
-    user.setFirstName("Existing");
-    user.setLastName("User");
-    user.setEmail("existing@example.com");
-    user.setPasswordHash("hashed-password");
+    user = new User("existing_user", "existing@example.com", "hashed-password");
+    ReflectionTestUtils.setField(user, "id", userId);
     when(userRepository.findById(userId)).thenReturn(Optional.of(user));
   }
 
   @Test
   void updateUserByUserIdPreservesFieldsOmittedFromPatch() {
-    UserUpdateRequest request = new UserUpdateRequest(null, null, null, null);
-    when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    UserUpdateRequest request = new UserUpdateRequest(null, null);
 
     UserResponse response = userService.updateUserByUserId(userId, request);
 
     assertEquals("existing_user", user.getUserName());
-    assertEquals("Existing", user.getFirstName());
-    assertEquals("User", user.getLastName());
     assertEquals("existing@example.com", user.getEmail());
     assertEquals("existing_user", response.userName());
-    assertEquals("Existing", response.firstName());
-    assertEquals("User", response.lastName());
     assertEquals("existing@example.com", response.email());
     verify(userRepository, never()).existsByEmail(any());
     verify(userRepository, never()).existsByUserName(any());
-    verify(userRepository).save(user);
   }
 
   @Test
   void updateUserByUserIdUpdatesFieldsProvidedByPatch() {
-    UserUpdateRequest request = new UserUpdateRequest(
-        "updated_user", "updated@example.com", "Updated", "Name");
+    UserUpdateRequest request = new UserUpdateRequest("updated_user", "updated@example.com");
     when(userRepository.existsByEmail(request.email())).thenReturn(false);
     when(userRepository.existsByUserName(request.userName())).thenReturn(false);
-    when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
     UserResponse response = userService.updateUserByUserId(userId, request);
 
     assertEquals("updated_user", response.userName());
-    assertEquals("Updated", response.firstName());
-    assertEquals("Name", response.lastName());
     assertEquals("updated@example.com", response.email());
     verify(userRepository).existsByEmail(request.email());
     verify(userRepository).existsByUserName(request.userName());

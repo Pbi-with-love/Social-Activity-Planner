@@ -1,35 +1,29 @@
 package com.socialactivityplanner.community_service.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 public class User {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
+  @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
   private UUID id;
 
-  @Column(name = "user_name", nullable = false, unique = true)
+  @Column(name = "username", nullable = false, unique = true, length = 50)
   private String userName;
-
-  @Column(name = "first_name", nullable = false)
-  private String firstName;
-
-  @Column(name = "last_name", nullable = false)
-  private String lastName;
 
   @Column(unique = true, nullable = false)
   private String email;
@@ -44,4 +38,23 @@ public class User {
   @UpdateTimestamp
   @Column(name = "updated_at", nullable = false)
   private Instant updatedAt;
+
+  public User(
+      String userName,
+      String email,
+      String passwordHash) {
+    this.userName = Objects.requireNonNull(userName, "userName must not be null");
+    this.email = Objects.requireNonNull(email, "email must not be null");
+    this.passwordHash = Objects.requireNonNull(passwordHash, "passwordHash must not be null");
+  }
+
+  /** Updates only the fields that are provided (non-null). */
+  public void updateProfile(String userName, String email) {
+    if (userName != null) {
+      this.userName = userName;
+    }
+    if (email != null) {
+      this.email = email;
+    }
+  }
 }

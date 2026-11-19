@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface MessageRepository extends JpaRepository<Message, UUID> {
 
-  Page<Message> findByGroupIdOrderBySentAtDesc(UUID groupId, Pageable pageable);
+  Page<Message> findByConversationIdOrderByIdDesc(UUID conversationId, Pageable pageable);
 
-  Optional<Message> findByIdAndGroupId(UUID messageId, UUID groupId);
+  Optional<Message> findByIdAndConversationId(UUID messageId, UUID conversationId);
 }

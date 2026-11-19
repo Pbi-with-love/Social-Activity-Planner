@@ -12,8 +12,6 @@ public final class UserMapper {
     return new UserResponse(
         user.getId(),
         user.getUserName(),
-        user.getFirstName(),
-        user.getLastName(),
         user.getEmail(),
         user.getCreatedAt(),
         user.getUpdatedAt());

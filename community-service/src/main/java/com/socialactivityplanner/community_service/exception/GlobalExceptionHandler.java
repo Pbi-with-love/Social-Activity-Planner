@@ -1,11 +1,16 @@
 package com.socialactivityplanner.community_service.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -13,12 +18,16 @@ import java.util.Map;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   // --- 400 Bad Request: validation errors (@Valid) ---
 
-  @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex) {
+  @Override
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatusCode status,
+      WebRequest request) {
     Map<String, String> fieldErrors = new HashMap<>();
     ex.getBindingResult().getFieldErrors()
         .forEach(error -> fieldErrors.put(error.getField(), error.getDefaultMessage()));
@@ -28,29 +37,18 @@ public class GlobalExceptionHandler {
     problem.setTitle("Invalid Request Content");
     problem.setProperty("errors", fieldErrors);
     problem.setProperty("timestamp", Instant.now());
-    return problem;
+    return ResponseEntity.badRequest().body(problem);
   }
 
   // --- 403 Forbidden: access denied / not a member ---
 
-  @ExceptionHandler(AccessDeniedException.class)
-  public ProblemDetail handleAccessDenied(AccessDeniedException ex) {
+  @ExceptionHandler(GroupAccessDeniedException.class)
+  public ProblemDetail handleAccessDenied(GroupAccessDeniedException ex) {
     log.warn("Access denied: {}", ex.getMessage());
 
     ProblemDetail problem = ProblemDetail.forStatusAndDetail(
         HttpStatus.FORBIDDEN, ex.getMessage());
     problem.setTitle("Access Denied");
-    problem.setProperty("timestamp", Instant.now());
-    return problem;
-  }
-
-  @ExceptionHandler(NotMemberException.class)
-  public ProblemDetail handleNotMember(NotMemberException ex) {
-    log.warn("Not a member: {}", ex.getMessage());
-
-    ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-        HttpStatus.FORBIDDEN, ex.getMessage());
-    problem.setTitle("Not a Group Member");
     problem.setProperty("timestamp", Instant.now());
     return problem;
   }
@@ -88,6 +86,16 @@ public class GlobalExceptionHandler {
     ProblemDetail problem = ProblemDetail.forStatusAndDetail(
         HttpStatus.CONFLICT, ex.getMessage());
     problem.setTitle("Already a Group Member");
+    problem.setProperty("timestamp", Instant.now());
+    return problem;
+  }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ProblemDetail handleIllegalArgument(IllegalArgumentException ex) {
+    ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+        HttpStatus.BAD_REQUEST,
+        ex.getMessage());
+    problem.setTitle("Invalid Argument");
     problem.setProperty("timestamp", Instant.now());
     return problem;
   }

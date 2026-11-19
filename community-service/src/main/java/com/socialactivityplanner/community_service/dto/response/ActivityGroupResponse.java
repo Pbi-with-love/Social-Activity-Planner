@@ -3,7 +3,7 @@ package com.socialactivityplanner.community_service.dto.response;
 import java.time.Instant;
 import java.util.UUID;
 
-public record GroupResponse(
+public record ActivityGroupResponse(
     UUID id,
     String name,
     String description,
