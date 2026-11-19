@@ -5,8 +5,7 @@ import com.socialactivityplanner.community_service.entity.GroupMember;
 
 public final class GroupMemberMapper {
 
-  private GroupMemberMapper() {
-  }
+  private GroupMemberMapper() {}
 
   public static GroupMemberResponse toResponse(GroupMember member) {
     return new GroupMemberResponse(

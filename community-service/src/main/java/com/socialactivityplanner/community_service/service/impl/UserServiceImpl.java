@@ -34,10 +34,8 @@ public class UserServiceImpl implements UserService {
       throw new DuplicateResourceException("Username already taken: " + request.userName());
     }
 
-    User user = new User(
-        request.userName(),
-        request.email(),
-        passwordEncoder.encode(request.password()));
+    User user =
+        new User(request.userName(), request.email(), passwordEncoder.encode(request.password()));
 
     return UserMapper.toResponse(userRepository.save(user));
   }
@@ -46,9 +44,10 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserResponse getCurrentUser(UUID userId) {
-    User user = userRepository
-        .findById(userId)
-        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+    User user =
+        userRepository
+            .findById(userId)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
     return UserMapper.toResponse(user);
   }
 
@@ -57,9 +56,10 @@ public class UserServiceImpl implements UserService {
   @Override
   @Transactional
   public UserResponse updateUserByUserId(UUID userId, UserUpdateRequest request) {
-    User user = userRepository
-        .findById(userId)
-        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+    User user =
+        userRepository
+            .findById(userId)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
     if (request.email() != null
         && !user.getEmail().equals(request.email())

@@ -1,21 +1,19 @@
 package com.socialactivityplanner.community_service.entity;
 
 import jakarta.persistence.*;
+import java.time.Instant;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "group_member")
 public class GroupMember {
-  @EmbeddedId
-  private GroupMemberId id;
+  @EmbeddedId private GroupMemberId id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("groupId")

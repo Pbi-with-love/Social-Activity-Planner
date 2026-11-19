@@ -10,5 +10,4 @@ public record MessageResponse(
     String senderUsername,
     String content,
     Instant sentAt,
-    Instant updatedAt) {
-}
+    Instant updatedAt) {}

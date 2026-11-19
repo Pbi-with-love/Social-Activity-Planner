@@ -1,11 +1,14 @@
 package com.socialactivityplanner.community_service.entity;
 
 import jakarta.persistence.AttributeConverter;
-
 import java.util.Locale;
 
-/** Stores Java enum constants (OWNER) as the lowercase values the DB CHECK constraints expect (owner). */
-public abstract class LowercaseEnumConverter<E extends Enum<E>> implements AttributeConverter<E, String> {
+/**
+ * Stores Java enum constants (OWNER) as the lowercase values the DB CHECK constraints expect
+ * (owner).
+ */
+public abstract class LowercaseEnumConverter<E extends Enum<E>>
+    implements AttributeConverter<E, String> {
 
   private final Class<E> type;
 

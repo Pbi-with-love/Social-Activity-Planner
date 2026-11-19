@@ -6,8 +6,7 @@ import com.socialactivityplanner.community_service.entity.User;
 
 public final class MessageMapper {
 
-  private MessageMapper() {
-  }
+  private MessageMapper() {}
 
   public static MessageResponse toResponse(Message message) {
     User sender = message.getSender();

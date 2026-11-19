@@ -9,5 +9,4 @@ public record ActivityGroupResponse(
     String description,
     UUID createdBy,
     Instant createdAt,
-    Instant updatedAt) {
-}
+    Instant updatedAt) {}

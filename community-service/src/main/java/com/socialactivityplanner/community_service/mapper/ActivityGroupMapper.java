@@ -5,8 +5,7 @@ import com.socialactivityplanner.community_service.entity.ActivityGroup;
 
 public final class ActivityGroupMapper {
 
-  private ActivityGroupMapper() {
-  }
+  private ActivityGroupMapper() {}
 
   public static ActivityGroupResponse toResponse(ActivityGroup group) {
     return new ActivityGroupResponse(

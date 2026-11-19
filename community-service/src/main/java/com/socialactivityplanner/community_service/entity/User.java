@@ -1,16 +1,15 @@
 package com.socialactivityplanner.community_service.entity;
 
 import jakarta.persistence.*;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
-
-import java.time.Instant;
-import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -39,10 +38,7 @@ public class User {
   @Column(name = "updated_at", nullable = false)
   private Instant updatedAt;
 
-  public User(
-      String userName,
-      String email,
-      String passwordHash) {
+  public User(String userName, String email, String passwordHash) {
     this.userName = Objects.requireNonNull(userName, "userName must not be null");
     this.email = Objects.requireNonNull(email, "email must not be null");
     this.passwordHash = Objects.requireNonNull(passwordHash, "passwordHash must not be null");
