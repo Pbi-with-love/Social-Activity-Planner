@@ -5,6 +5,7 @@
 .gradle/
 build/
 **/build/
+bin/
 
 # Spring application configs with environment-variable placeholders (no credentials)
 **/src/main/resources/application*.yml

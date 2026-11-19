@@ -65,10 +65,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-// Single source of truth for Java formatting, shared with VS Code and IntelliJ
+// google-java-format, same version as .vscode/settings.json; IntelliJ uses the google-java-format plugin
 spotless {
     java {
         target("src/**/*.java")
-        eclipse().configFile("../config/java-formatter.xml")
+        googleJavaFormat("2.0.0")
     }
 }

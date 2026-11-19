@@ -1,7 +1,6 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.format.settings.url": "config/java-formatter.xml",
-    "java.format.settings.profile": "Eclipse",
+    "java.format.settings.google.version": "2.0.0",
 
     "[java]": {
         "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code",
